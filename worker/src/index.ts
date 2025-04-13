@@ -2,7 +2,7 @@ import { workerConfig } from '../../uptime.config'
 import { getWorkerLocation } from './util'
 import { MonitorState, MonitorTarget } from '../../uptime.types'
 import { getStatus } from './monitor'
-import { notifyDiscord } from './components/discord'
+import { notifyDiscord } from './components/discord.ts'
 
 export interface Env {
   UPTIMEFLARE_STATE: KVNamespace
