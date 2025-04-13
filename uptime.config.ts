@@ -53,7 +53,7 @@ const workerConfig = {
   ],
 
   callbacks: {
-    onStatusChange: async (env: any, monitor: Monitor, timeIncidentStart: number, timeNow: number, reason: string) => {
+    onStatusChange: async (env: any, monitor: any, timeIncidentStart: number, timeNow: number, reason: string) => {
       try {
         await notifyDiscord(monitor, isUp);
       } catch (e) {
@@ -61,7 +61,7 @@ const workerConfig = {
       }
     },
 
-    onIncident: async (env: any, monitor: Monitor, timeIncidentStart: number, timeNow: number, reason: string) => {
+    onIncident: async (env: any, monitor: any, timeIncidentStart: number, timeNow: number, reason: string) => {
       try {
         const durationMs = timeNow - timeIncidentStart;
         const durationMinutes = Math.floor(durationMs / 60000);
