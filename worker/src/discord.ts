@@ -1,5 +1,5 @@
-export async function notifyDiscord(monitor: any, isUp: boolean) {
-  const webhook = env.DISCORD_WEBHOOK_URL
+export async function notifyDiscord(env: any, monitor: any, isUp: boolean) {
+  const webhook = env.DISCORD_WEBHOOK_URL;
   if (!webhook) {
     console.warn('DISCORD_WEBHOOK_URL not set, skipping Discord notification')
     return
