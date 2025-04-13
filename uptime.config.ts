@@ -103,48 +103,16 @@ const workerConfig = {
       ///timeout: 5000,
     ///},
   ],
-  notification: {
-    // [Optional] apprise API server URL
-    // if not specified, no notification will be sent
-    ///appriseApiServer: "https://appsrise-notify.dreamvr.studio/notify",
-    // [Optional] recipient URL for apprise, refer to https://github.com/caronc/apprise
-    // if not specified, no notification will be sent
-    ///recipientUrl: "discord://1357741931987472576/mhOudQRLz9dhLWHq9a9LdYxbgx74fcUU7bblFbjXVQbLn0Dk5N3f1D-TojnH6Xs2WPAG",
-    // [Optional] timezone used in notification messages, default to "Etc/GMT"
-    ///timeZone: "Europe/Moscow",
-    // [Optional] grace period in minutes before sending a notification
-    // notification will be sent only if the monitor is down for N continuous checks after the initial failure
-    // if not specified, notification will be sent immediately
-    //gracePeriod: 5,
-    // [Optional] disable notification for monitors with specified ids
-    //skipNotificationIds: ['foo_monitor', 'bar_monitor'],
-  },
   callbacks: {
-    onStatusChange: async (
-      env: any,
-      monitor: any,
-      isUp: boolean,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {
-      // This callback will be called when there's a status change for any monitor
-      // Write any Typescript code here
-
-      // This will not follow the grace period settings and will be called immediately when the status changes
-      // You need to handle the grace period manually if you want to implement it
-    },
-    onIncident: async (
-      env: any,
-      monitor: any,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {
-      // This callback will be called EVERY 1 MINTUE if there's an on-going incident for any monitor
-      // Write any Typescript code here
-    },
-  },
+  onStatusChange: /* @__PURE__ */ __name(async (env, monitor, isUp, timeIncidentStart, timeNow, reason) => {
+    try {
+      await notifyDiscord(monitor, isUp);
+    } catch (e) {
+      console.error("Failed to send Discord notification:", e);
+    }
+  }, "onStatusChange"),
+  onIncident: /* @__PURE__ */ __name(async (env, monitor, timeIncidentStart, timeNow, reason) => {
+  }, "onIncident")
 }
 
 // Don't forget this, otherwise compilation fails.
