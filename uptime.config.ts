@@ -111,7 +111,7 @@ const workerConfig = {
     // if not specified, no notification will be sent
     ///recipientUrl: "discord://1357741931987472576/mhOudQRLz9dhLWHq9a9LdYxbgx74fcUU7bblFbjXVQbLn0Dk5N3f1D-TojnH6Xs2WPAG",
     // [Optional] timezone used in notification messages, default to "Etc/GMT"
-    timeZone: "Europe/Moscow",
+    ///timeZone: "Europe/Moscow",
     // [Optional] grace period in minutes before sending a notification
     // notification will be sent only if the monitor is down for N continuous checks after the initial failure
     // if not specified, notification will be sent immediately
