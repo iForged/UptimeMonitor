@@ -69,7 +69,7 @@ const workerConfig = {
           ...monitor,
           name: `${monitor.name} (Still Down — ${durationMinutes} min)`,
         };
-        await notifyDiscord(modifiedMonitor, false);
+        await notifyDiscord(env, modifiedMonitor, false);
       } catch (e) {
         console.error("Failed to send repeat Discord notification:", e);
       }
