@@ -10,7 +10,7 @@ export async function notifyDiscord(monitor: any, isUp: boolean) {
     embeds: [
       {
         title: `${monitor.name} is ${isUp ? 'Operational ✅' : 'Down ❌'}`,
-        description: `\`${monitor.method || 'GET'} ${monitor.url}\` - 👀 Status Page`,
+        description: `\`${monitor.method || 'GET'} ${monitor.target}\` - 👀 Status Page`,
         color: isUp ? 0x2ecc71 : 0xe74c3c,
         timestamp: new Date().toISOString(),
       },
