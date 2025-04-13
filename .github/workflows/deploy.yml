@@ -70,6 +70,13 @@ jobs:
           cd worker
           npm install
 
+      - name: Set Discord Webhook Secret
+        run: |
+          echo "${{ secrets.DISCORD_WEBHOOK_URL }}" | npx wrangler secret put DISCORD_WEBHOOK_URL --name uptimeflare_worker
+        working-directory: ./worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
       - name: Build worker
         run: |
           cd worker
