@@ -55,7 +55,7 @@ const workerConfig = {
   callbacks: {
     onStatusChange: async (env: any, monitor: any, isUp: boolean, timeIncidentStart: number, timeNow: number, reason: string) => {
       try {
-        await notifyDiscord(monitor, isUp);
+        await notifyDiscord(env, monitor, isUp);
       } catch (e) {
         console.error("Failed to send Discord notification:", e);
       }
