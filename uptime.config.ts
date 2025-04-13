@@ -1,4 +1,4 @@
-import { notifyDiscord } from './discord';
+import { notifyDiscord } from './worker/src/discord';
 
 const pageConfig = {
   // Title for your status page
