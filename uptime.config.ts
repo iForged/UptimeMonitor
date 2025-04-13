@@ -10,6 +10,7 @@ const pageConfig = {
   // If not specified, all monitors will be shown in a single list
   // If specified, monitors will be grouped and ordered, not-listed monitors will be invisble (but still monitored)
   group: {
+    "🌐 Fplay": ['fplay_web', 'fplay_master'],
     "🌐 WEB Services": ['vs_web', 'vs_map'],
     "🗄️ Servers": ['vs_server'],
   },
@@ -23,16 +24,29 @@ const workerConfig = {
   // Define all your monitors here
   monitors: [
     {
+      id: 'fplay_web',
+      name: 'FPlay Web',
+      method: 'GET',
+      target: 'https://fplay.su',
+    },
+    {
+      id: 'fplay_master',
+      name: 'FPlay Master Server',
+      method: 'GET',
+      expectedCodes: [403],
+      target: 'http://dev.fplay.free.hr/api/',
+    },
+    {
       id: 'vs_web',
       name: 'VintageStory Web',
       method: 'GET',
-      target: 'https://staff.dreamvr.studio',
+      target: 'https://vs.globalsrv.net',
     },
     {
       id: 'vs_map',
       name: 'VintageStory Map',
       method: 'GET',
-      target: 'https://gitlab.dreamvr.studio',
+      target: 'https://vs-map.globalsrv.net',
     },  
     {
       id: 'vs_server',
