@@ -1,3 +1,5 @@
+import { notifyDiscord } from './notify-discord';
+
 const pageConfig = {
   // Title for your status page
   title: "GlobalSRV Status Page",
@@ -7,21 +9,15 @@ const pageConfig = {
     { link: 'https://discord.com/users/forged5909', label: 'Contact me', highlight: true },
   ],
   // [OPTIONAL] Group your monitors
-  // If not specified, all monitors will be shown in a single list
-  // If specified, monitors will be grouped and ordered, not-listed monitors will be invisble (but still monitored)
   group: {
     "🌐 Fplay": ['fplay_web', 'fplay_master'],
     "🌐 WEB Services": ['vs_web', 'vs_map'],
     "🗄️ Servers": ['vs_server'],
   },
-}
+};
 
 const workerConfig = {
-  // Write KV at most every 3 minutes unless the status changed
   kvWriteCooldownMinutes: 3,
-  // Enable HTTP Basic auth for status page & API by uncommenting the line below, format `<USERNAME>:<PASSWORD>`
-  // passwordProtection: 'username:password',
-  // Define all your monitors here
   monitors: [
     {
       id: 'fplay_web',
@@ -47,7 +43,7 @@ const workerConfig = {
       name: 'VintageStory Map',
       method: 'GET',
       target: 'https://vs-map.globalsrv.net',
-    },  
+    },
     {
       id: 'vs_server',
       name: 'VintageStory Server',
@@ -55,7 +51,7 @@ const workerConfig = {
       target: '185.9.145.2:42420',
     },
   ],
-  
+
   callbacks: {
     onStatusChange: async (env, monitor, isUp, timeIncidentStart, timeNow, reason) => {
       try {
@@ -63,7 +59,7 @@ const workerConfig = {
       } catch (e) {
         console.error("Failed to send Discord notification:", e);
       }
-  },
+    },
 
     onIncident: async (env, monitor, timeIncidentStart, timeNow, reason) => {
       try {
@@ -71,14 +67,14 @@ const workerConfig = {
         const durationMinutes = Math.floor(durationMs / 60000);
         const modifiedMonitor = {
           ...monitor,
-          name: `${monitor.name} (Still Down — ${durationMinutes} min)`
+          name: `${monitor.name} (Still Down — ${durationMinutes} min)`,
         };
         await notifyDiscord(modifiedMonitor, false);
       } catch (e) {
         console.error("Failed to send repeat Discord notification:", e);
-    }
-  }
-}
+      }
+    },
+  },
+};
 
-// Don't forget this, otherwise compilation fails.
-export { pageConfig, workerConfig }
+export { pageConfig, workerConfig };
