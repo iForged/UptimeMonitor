@@ -55,16 +55,17 @@ const workerConfig = {
       target: '185.9.145.2:42420',
     },
   ],
-callbacks: {
-    onStatusChange: /* @__PURE__ */ __name(async (env, monitor, isUp, timeIncidentStart, timeNow, reason) => {
+  
+  callbacks: {
+    onStatusChange: async (env, monitor, isUp, timeIncidentStart, timeNow, reason) => {
       try {
         await notifyDiscord(monitor, isUp);
       } catch (e) {
         console.error("Failed to send Discord notification:", e);
       }
-    }, "onStatusChange"),
+  },
 
-    onIncident: /* @__PURE__ */ __name(async (env, monitor, timeIncidentStart, timeNow, reason) => {
+    onIncident: async (env, monitor, timeIncidentStart, timeNow, reason) => {
       try {
         const durationMs = timeNow - timeIncidentStart;
         const durationMinutes = Math.floor(durationMs / 60000);
@@ -75,8 +76,7 @@ callbacks: {
         await notifyDiscord(modifiedMonitor, false);
       } catch (e) {
         console.error("Failed to send repeat Discord notification:", e);
-      }
-    }, "onIncident")
+    }
   }
 }
 
