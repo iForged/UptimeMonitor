@@ -32,7 +32,7 @@ export default function Header() {
               variant="gradient"
               gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
             >
-              UptimeFlare
+              GlobalSRV Uptime Monitor
             </Text>
           </a>
         </div>
