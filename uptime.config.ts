@@ -29,8 +29,7 @@ const workerConfig = {
       id: 'fplay_master',
       name: 'FPlay Master Server',
       method: 'GET',
-      expectedCodes: [403],
-      target: 'http://dev.fplay.free.hr/api/vs/v1/servers/',
+      target: 'http://dev.fplay.free.hr/api/vs/v1/servers/list',
     },
     {
       id: 'vs_web',
